@@ -1,24 +1,25 @@
 {
-  "name": "ytech-js-extensions",
-  "version": "0.0.1",
-  "description": "Simple prototype extensions which can improve your working with js",
-  "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Yegorich555/ytech-js-extensions.git"
-  },
-  "keywords": [
-    "js",
-    "extensions",
-    "js-extensions"
-  ],
-  "author": "Yegorich555",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Yegorich555/ytech-js-extensions/issues"
-  },
-  "homepage": "https://github.com/Yegorich555/ytech-js-extensions#readme"
+    "name": "ytech-js-extensions",
+    "version": "0.0.1",
+    "description": "Simple prototype extensions which can improve your working with js",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Yegorich555/ytech-js-extensions.git"
+    },
+    "keywords": [
+        "js",
+        "extensions",
+        "js-extensions"
+    ],
+    "author": "Yegorich555",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Yegorich555/ytech-js-extensions/issues"
+    },
+    "homepage": "https://github.com/Yegorich555/ytech-js-extensions#readme",
+    "files": ["index.js"]
 }
