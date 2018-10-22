@@ -6,3 +6,4 @@
 /* global define */
 
 module.exports = require('./lib/array.js');
+module.exports = require('./lib/date.js');

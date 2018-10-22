@@ -1,0 +1,96 @@
+var assert = require('assert');
+require('../index');
+
+describe('Date', function() {
+    var defined = fn => {
+        it('defined', function() { assert.notEqual(undefined, fn); });
+        return fn != null;
+    }
+    var dt1 = new Date(Date.parse('2018-10-22'));
+    var dtNaN1 = new Date(55555555555555555);
+
+    describe('#tryParseJSON', function() {
+        if (!defined(Date.tryParseJSON))
+            return;
+        it('return date type', function() { assert.strictEqual(true, Date.tryParseJSON(dt1.toJSON()) instanceof Date); });
+        it('same date', function() { assert.strictEqual(dt1.valueOf(), Date.tryParseJSON(dt1.toJSON()).valueOf()); });
+        var testStr = '2018-69-70T00:00:00'
+        it(`bad string date "${testStr}": return inputValue`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)); });
+
+        testStr = '2018-12-01'
+        it(`not full date "${testStr}": return inputValue`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)); });
+
+        testStr = '2018-12-01T00:00:00kkk'
+        it(`bad end of string"${testStr}": return date`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)) });
+    });
+
+    describe('#compareByDate', function() {
+        if (!defined(Date.compareByDate))
+            return;
+
+        it('equal for same values', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(dt1.valueOf())) === 0); });
+        it('equal for different time', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(new Date(dt1).setHours(2))) === 0); });
+        it('not equal for different date values', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(new Date(dt1).setFullYear(1997))) !== 0); });
+    });
+
+    describe('#equal', function() {
+        if (!defined(Date.equal))
+            return;
+
+        it('equal for same values', function() { assert.strictEqual(true, Date.equal(dt1, new Date(dt1.valueOf()))); });
+        it('equal for NaN values', function() { assert.strictEqual(true, Date.equal(dtNaN1, new Date(dtNaN1.valueOf()))); });
+        it('not equal for different', function() { assert.notStrictEqual(true, Date.equal(dt1, new Date(dt1.valueOf() + 1))); });
+    });
+
+    describe('#equalDates', function() {
+        if (!defined(Date.equal))
+            return;
+        it('equal for same values but different in time', function() { assert.strictEqual(true, Date.equal(dt1, new Date(dt1.setHours(1)))); });
+        it('equal for NaN values', function() { assert.strictEqual(true, Date.equal(dtNaN1, new Date(dtNaN1.valueOf()))); });
+        it('not equal for different months', function() { assert.notStrictEqual(true, Date.equal(dt1, new Date(new Date(dt1.valueOf()).setMonth(42)))); });
+    });
+
+    function checkAdd(funcName) {
+        describe(`#${funcName}`, function() {
+            if (!defined(dt1[funcName]))
+                return;
+
+            it('return date type', function() { assert.strictEqual(true, dt1[funcName](42) instanceof Date); });
+            it('equal reverted', function() { assert.strictEqual(dt1.valueOf(), dt1[funcName](42)[funcName](-42).valueOf()); });
+        });
+    }
+    checkAdd('addDays');
+    checkAdd('addMonths');
+    checkAdd('addYears');
+
+    function checkReset(funcName, newDateFnc) {
+        describe(`#${funcName}`, function() {
+            if (!defined(dt1[funcName]))
+                return;
+
+            it('return date type', function() { assert.strictEqual(true, new Date()[funcName]() instanceof Date); });
+            it('reseted time', function() {
+                var dt = newDateFnc(2018, 1, 1, 1, 1, 1, 689)[funcName]();
+                assert.strictEqual(newDateFnc(2018, 1, 1, 0, 0, 0, 0).valueOf(), dt.valueOf());
+            });
+        });
+    }
+
+    checkReset('resetTime', (y, m, d, h, mm, s, ms) => new Date(y, m, d, h, mm, s, ms));
+    checkReset('resetUTCTime', (y, m, d, h, mm, s, ms) => new Date(Date.UTC(y, m, d, h, mm, s, ms)));
+
+    describe('#UTCFromValues', function() {
+        if (!defined(Date.UTCFromValues))
+            return;
+        it('return date type', function() { assert.strictEqual(true, Date.UTCFromValues(2017, 1, 1) instanceof Date); });
+        it('equal for same naitve-date', function() { assert.strictEqual(Date.UTC(2017, 1, 1), Date.UTCFromValues(2017, 1, 1).valueOf()); });
+    });
+
+    describe('#UTCFromDate', function() {
+        if (!defined(Date.UTCFromDate))
+            return;
+        it('return date type', function() { assert.strictEqual(true, Date.UTCFromDate(dt1) instanceof Date); });
+        it('return isNaN if input isNaN', function() { assert.strictEqual(true, isNaN(Date.UTCFromDate(dtNaN1))); });
+        it('equal for the same UTCdate', function() { assert.strictEqual(Date.UTC(2017, 1, 1), Date.UTCFromDate(new Date(2017, 1, 1)).valueOf()); });
+    });
+});
