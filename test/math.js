@@ -7,11 +7,39 @@ describe('Math', function() {
         return fn != null;
     }
 
-    describe('#degToRad', function() {
-        if (!defined(Math.degToRad))
+    describe('#randomInt', function() {
+        if (!defined(Math.randomInt))
             return;
-        it('calculate', function() { assert.strictEqual(Math.PI, Math.degToRad(180)); });
+        it('get with defaults', function() {
+            var v = Math.randomInt();
+            assert.strictEqual(true, v >= 0 && v <= 32767);
+        });
+        it('get between', function() {
+            var v = Math.randomInt(123, 768);
+            assert.strictEqual(true, v >= 123 && v <= 768);
+        });
     });
+
+    describe('#Math.convert', function() {
+        if (!defined(Math.convert))
+            return;
+        describe('#kmToMiles', function() {
+            if (!defined(Math.convert.kmToMiles))
+                return;
+            it('calculate', function() { assert.strictEqual(10, Math.convert.kmToMiles(16.09344)); });
+        });
+        describe('#milesToKm', function() {
+            if (!defined(Math.convert.milesToKm))
+                return;
+            it('calculate', function() { assert.strictEqual(16.09344, Math.convert.milesToKm(10)); });
+        });
+        describe('#degToRad', function() {
+            if (!defined(Math.convert.degToRad))
+                return;
+            it('calculate', function() { assert.strictEqual(Math.PI, Math.convert.degToRad(180)); });
+        });
+    });
+
     describe('#Math.coord', function() {
         if (!defined(Math.coord))
             return;
