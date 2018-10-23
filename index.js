@@ -7,3 +7,4 @@
 
 module.exports = require('./lib/array.js');
 module.exports = require('./lib/date.js');
+module.exports = require('./lib/math.js');
