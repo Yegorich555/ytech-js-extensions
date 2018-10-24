@@ -9,3 +9,4 @@ module.exports = require('./lib/array.js');
 module.exports = require('./lib/date.js');
 module.exports = require('./lib/math.js');
 module.exports = require('./lib/string.js');
+module.exports = require('./lib/object.js');
