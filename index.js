@@ -4,6 +4,7 @@
   https://github.com/Yegorich555/ytech-js-extensions
 */
 /* global define */
+'use strict'
 
 require('./lib/array/index.js');
 require('./lib/date/index.js');
