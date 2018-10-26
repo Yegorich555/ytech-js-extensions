@@ -5,8 +5,10 @@
 */
 /* global define */
 
-require('./lib/array.js');
-require('./lib/date.js');
-require('./lib/math.js');
-require('./lib/string.js');
-require('./lib/object/index.js');
+require('./lib/array/index.js');
+require('./lib/date/index.js');
+require('./lib/math/index.js');
+require('./lib/string/index.js');
+module.exports = {
+    equalOptions: require('./lib/object/index.js')
+}
