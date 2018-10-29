@@ -34,20 +34,20 @@ describe('Date', function() {
     });
 
     describe('#equal', function() {
-        if (!defined(Date.equal))
+        if (!defined(dt1.equal))
             return;
 
-        it('equal for same values', function() { assert.strictEqual(true, Date.equal(dt1, new Date(dt1.valueOf()))); });
-        it('equal for NaN values', function() { assert.strictEqual(true, Date.equal(dtNaN1, new Date(dtNaN1.valueOf()))); });
-        it('not equal for different', function() { assert.notStrictEqual(true, Date.equal(dt1, new Date(dt1.valueOf() + 1))); });
+        it('equal for same values', function() { assert.strictEqual(true, dt1.equal(new Date(dt1.valueOf()))); });
+        it('equal for NaN values', function() { assert.strictEqual(true, dtNaN1.equal(new Date(dtNaN1.valueOf()))); });
+        it('not equal for different', function() { assert.notStrictEqual(true, dt1.equal(new Date(dt1.valueOf() + 1))); });
     });
 
     describe('#equalDates', function() {
-        if (!defined(Date.equal))
+        if (!defined(dt1.equalDates))
             return;
-        it('equal for same values but different in time', function() { assert.strictEqual(true, Date.equal(dt1, new Date(dt1.setHours(1)))); });
-        it('equal for NaN values', function() { assert.strictEqual(true, Date.equal(dtNaN1, new Date(dtNaN1.valueOf()))); });
-        it('not equal for different months', function() { assert.notStrictEqual(true, Date.equal(dt1, new Date(new Date(dt1.valueOf()).setMonth(42)))); });
+        it('equal for same values but different in time', function() { assert.strictEqual(true, dt1.equalDates(new Date(dt1.setHours(1)))); });
+        it('equal for NaN values', function() { assert.strictEqual(true, dtNaN1.equalDates(new Date(dtNaN1.valueOf()))); });
+        it('not equal for different months', function() { assert.notStrictEqual(true, dt1.equalDates(new Date(new Date(dt1.valueOf()).setMonth(42)))); });
     });
 
     function checkAdd(funcName) {
