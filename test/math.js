@@ -43,6 +43,12 @@ describe('Math', function() {
     describe('#Math.coord', function() {
         if (!defined(Math.coord))
             return;
+        describe('#Math.coord.distanceBetween', function() {
+            if (!defined(Math.coord.distanceBetween))
+                return;
+            it('0 for the same', function() { assert.strictEqual(0, Math.coord.distanceBetween(53.8, 27.5, 53.8, 27.5)); });
+            it('calculate', function() { assert.strictEqual(128.7393221627752, Math.coord.distanceBetween(53.8, 27.5, 54.8, 28.5)); });
+        });
         describe('#Math.coord.addToLat', function() {
             if (!defined(Math.coord.addToLat))
                 return;

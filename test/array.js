@@ -1,4 +1,7 @@
 var assert = require('assert');
+Array.prototype.includes = null;
+Array.prototype.find = null;
+Array.prototype.filter = null;
 require('../index');
 
 describe('Array', function() {
@@ -31,6 +34,8 @@ describe('Array', function() {
     describe('#addIfNotExists', function() {
         it('defined', function() { assert.notStrictEqual(undefined, [].addIfNotExists); });
         if (![].addIfNotExists) return;
+        it('undefined for null', function() { assert.strictEqual(undefined, Array.prototype.addIfNotExists.call()) })
+        it('exception for invalid propName type', function() { assert.throws(_ => [].addIfNotExists(null, 1), TypeError) })
         it('add for int-type', function() {
             var arr = [1, 2];
             var v = arr.addIfNotExists(3);
@@ -74,6 +79,7 @@ describe('Array', function() {
     describe('#remove', function() {
         it('defined', function() { assert.notStrictEqual(undefined, [].remove); });
         if (![].remove) return;
+        it('undefined for null', function() { assert.strictEqual(undefined, Array.prototype.remove.call()) })
         it('remove for int-type', function() {
             var arr = [1, 2, 3];
             var v = arr.remove(2);
