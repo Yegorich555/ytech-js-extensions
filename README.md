@@ -68,59 +68,59 @@ console.log(arr, removedItem);
 ### Array
 
 - _instance_
-  - [**.last**()](#array) ⇒ `any`
-  - [**.includes**(item: any)](#array) ⇒ `Boolean`
-  - [**.find**(item: any, predicate: function)](#array) ⇒ `any`
-  - [**.filter**(callbackfn: function)](#array) ⇒ `new Array`
-  - [**.addIfNotExists**(item: any, null | String | predicate)](#array) ⇒ `executed item: any`
-  - [**.remove**(item: any | predicate: function)](#array) ⇒ `executed item: any`
+  - [**.last**()](#array) ⇒ `any - last item from array (undefined if array is empty)`
+  - [**.includes**(item: any)](#array) ⇒ `Boolean - polyfill if ES6 .includes() is undefined`
+  - [**.find**(item: any, predicate: function)](#array) ⇒ `any - polyfill if ES6 .find() is undefined`
+  - [**.filter**(callbackfn: function)](#array) ⇒ `new Array - polyfill if ES6 .filter() is undefined`
+  - [**.addIfNotExists**(item: any, null | String | predicate)](#array) ⇒ `executed item: any - add item if it doesn't exist. The second argument => Null - for primitives, string - search by name, function - predicate like in a .filter()`
+  - [**.remove**(item: any | predicate: function)](#array) ⇒ `executed item: any - remove item by predicate for searching or by item (for direct comparing)`
 - _static_
-  - [**.concatNotNull**(...arrays: [] | null)](#array) ⇒ `new Array`
+  - [**.concatNotNull**(...arrays: [] | null)](#array) ⇒ `new Array - concatinate arrays exlcuding null-arrays => Array.concatNotNull([1,2], null)`
 
 ### String
 
 - _instance_
-  - [**.equal**(value: String)](#string) ⇒ `Boolean`
-  - [**.fromCamelCase**()](#string) ⇒ `new String`
-  - [**.toCamelCase**()](#string) ⇒ `new String`
-  - [**.toLowerCaseFirst**()](#string) ⇒ `new String`
-  - [**.toUpperCaseFirst**()](#string) ⇒ `new String`
+  - [**.equal**(value: String)](#string) ⇒ `Boolean - compare with ignoring case`
+  - [**.fromCamelCase**()](#string) ⇒ `new String - transform from camelCase: 'myCamelCaseString' to 'My Camel Case String'`
+  - [**.toCamelCase**()](#string) ⇒ `new String - split string by spaces and join to camelCase: 'My camel Case string' to 'myCamelCaseString'`
+  - [**.toLowerCaseFirst**()](#string) ⇒ `new String - set to lower case first char`
+  - [**.toUpperCaseFirst**()](#string) ⇒ `new String - set to upper case first char`
 
 ### Date
 
 - _instance_
-  - [**.equal**(value: Date)](#date) ⇒ `Boolean`
-  - [**.equalDates**(value: Date)](#date) ⇒ `Boolean`
+  - [**.equal**(value: Date)](#date) ⇒ `Boolean - compare by values`
+  - [**.equalDates**(value: Date)](#date) ⇒ `Boolean - compare without time-values`
   - [**.addDays**(value: Number)](#date) ⇒ `Date`
   - [**.addMonths**(value: Number)](#date) ⇒ `Date`
   - [**.addYears**(value: Number)](#date) ⇒ `Date`
   - [**.resetTime**()](#date) ⇒ `Date`
   - [**.resetUTCTime**()](#date) ⇒ `Date`
 - _static_
-  - [**.tryParseJSON**(value: String)](#date) ⇒ `new Date or same String`
-  - [**.compareByDate**(v1: Date, v2: Date)](#date) ⇒ `-1, 0 or 1`
-  - [**.UTCFromValues**(year: Number, month: Number, date: Number)](#date) ⇒ `new Date`
-  - [**.UTCFromDate**(Date)](#date) ⇒ `new Date`
+  - [**.tryParseJSON**(value: String)](#date) ⇒ `new Date or same String - try parse Date from String-Date-ISO-Format`
+  - [**.compareByDate**(v1: Date, v2: Date)](#date) ⇒ `-1, 0 or 1 - compare without time-value for sort functions`
+  - [**.UTCFromValues**(year: Number, month: Number, date: Number)](#date) ⇒ `new Date - create UTC date`
+  - [**.UTCFromDate**(Date)](#date) ⇒ `new Date - create UTC date`
 
 ### Math
 
-- [Math **.randomInt**(min?: Number, max?: Number)](#math) ⇒ `Int`
+- [Math **.randomInt**(min?: Number, max?: Number)](#math) ⇒ `Int - generate random int between values`
 
 #### Math.Convert
 
-- [Math.Convert **.kmToMiles**(km: Number)](#mathconvert) ⇒ `Float`
-- [Math.Convert **.milesToKm**(miles: Number)](#mathconvert) ⇒ `Float`
-- [Math.Convert **.degToRad**(value: Number)](#mathconvert) ⇒ `Float`
+- [Math.Convert **.kmToMiles**(km: Number)](#mathconvert) ⇒ `Float - convert kilometers to miles`
+- [Math.Convert **.milesToKm**(miles: Number)](#mathconvert) ⇒ `Float - convert miles to kilometers`
+- [Math.Convert **.degToRad**(value: Number)](#mathconvert) ⇒ `Float - convert degrees to radians`
 
 #### Math.Coord
 
-- [Math.Coord **.distanceBetween**(lat1: Number, lng1: Number, lat2: Number, lng2: Number)](#mathcoord) ⇒ `Meters: Number`
-- [Math.Coord **.addToLat**(lat: Number, km: Number)](#mathcoord) ⇒ `Latitude: Float`
-- [Math.Coord **.addToLng**(lng: Number, lat: Number, km: Number)](#mathcoord) ⇒ `Longitude: Float`
+- [Math.Coord **.distanceBetween**(lat1: Number, lng1: Number, lat2: Number, lng2: Number)](#mathcoord) ⇒ `Kilometers: Number - distance between 2 coordinates`
+- [Math.Coord **.addToLat**(lat: Number, km: Number)](#mathcoord) ⇒ `Latitude: Float - add distance to latitude`
+- [Math.Coord **.addToLng**(lng: Number, lat: Number, km: Number)](#mathcoord) ⇒ `Longitude: Float - add distance to longitude`
 
 ### Object
 
-- [Object **.equal**(v1: any, v2: any, options?: [EqualOptions](equaloptions))](#objectequal) ⇒ `Boolean`
+- [Object **.equal**(v1: any, v2: any, options?: [EqualOptions](equaloptions))](#objectequal) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
 
 ### Object.equal
 
@@ -135,7 +135,6 @@ console.log(Object.equal(v1, v2)) //expected true
 
 //Compare with options
 var options = new EqualOptions();
-options.onlyOwnProperties = true;
 options.ignoreEmptyArrays = true;
 options.ignoreFunctions = false; //we setted ignoreFunction to false
 options.checkKeysLength = false;
