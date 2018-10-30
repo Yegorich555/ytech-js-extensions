@@ -120,7 +120,8 @@ console.log(arr, removedItem);
 
 ### Object
 
-- [Object **.equal**(v1: any, v2: any, options?: [EqualOptions](equaloptions))](#objectequal) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
+- [Object **.equal**(v1: any, v2: any, options?:](#objectequal) [EqualOptions](#equaloptions)) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
+- [Object **.tryParseJSONDate**(obj: any)](#object) ⇒ `the same object: any - recursively find string values and trying parse to Date by Date.tryParseJSON(str)`
 
 ### Object.equal
 

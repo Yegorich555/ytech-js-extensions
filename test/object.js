@@ -125,4 +125,23 @@ describe('Object', function() {
         })
     });
 
+    describe('#tryParseJSONDate', function() {
+        if (!defined(Object.tryParseJSONDate))
+            return;
+        var dt = new Date();
+        var dtv = dt.valueOf();
+        var dtStr = dt.toJSON();
+
+        it('primitive string', function() { assert.strictEqual(dtv, Object.tryParseJSONDate(dtStr).valueOf()) })
+        it('array', function() {
+            var r = Object.tryParseJSONDate([dt, dtStr, 1]);
+            assert.strictEqual(true, r[0].valueOf() == dtv && r[1].valueOf() == dtv && r[2] == 1);
+        })
+        it('properties', function() {
+            var v = { id: 1, dt, dt2: dtStr, str: 'ds', arr: [{ id: 11 }, 2] }
+            Object.tryParseJSONDate(v);
+            var equal = v.id === 1 && v.dt === dt && v.dt2.valueOf() === dtv && v.str === 'ds' && v.arr[0].id === 11 && v.arr[1] == 2;
+            assert.strictEqual(true, equal);
+        })
+    })
 });
