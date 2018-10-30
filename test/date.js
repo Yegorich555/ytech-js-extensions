@@ -9,18 +9,22 @@ describe('Date', function() {
     var dt1 = new Date(Date.parse('2018-10-22'));
     var dtNaN1 = new Date(55555555555555555);
 
+    function returnTheSame(msg, v) {
+        it(msg.replace('{v}', `"${v}"`) + ': return inputValue', function() { assert.strictEqual(v, Date.tryParseJSON(v)); });
+    }
+
     describe('#tryParseJSON', function() {
         if (!defined(Date.tryParseJSON))
             return;
         it('return date type', function() { assert.strictEqual(true, Date.tryParseJSON(dt1.toJSON()) instanceof Date); });
         it('same date', function() { assert.strictEqual(dt1.valueOf(), Date.tryParseJSON(dt1.toJSON()).valueOf()); });
-        var testStr = '2018-69-70T00:00:00'
-        it(`bad string date "${testStr}": return inputValue`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)); });
+        returnTheSame('bad string date regex {v}', '2018-dd-12T00:00:00');
+        returnTheSame('bad string date but good regex {v}', '2018-69-70T00:00:00');
+        returnTheSame('not full date {v}', '2018-12-01');
+        returnTheSame('not string {v}', 5);
+        returnTheSame('string length > 27 {v}', '012345678901234567890123456789');
 
-        testStr = '2018-12-01'
-        it(`not full date "${testStr}": return inputValue`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)); });
-
-        testStr = '2018-12-01T00:00:00kkk'
+        var testStr = '2018-12-01T00:00:00kkk'
         it(`bad end of string"${testStr}": return date`, function() { assert.strictEqual(testStr, Date.tryParseJSON(testStr)) });
     });
 
@@ -30,7 +34,8 @@ describe('Date', function() {
 
         it('equal for same values', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(dt1.valueOf())) === 0); });
         it('equal for different time', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(new Date(dt1).setHours(2))) === 0); });
-        it('not equal for different date values', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(new Date(dt1).setFullYear(1997))) !== 0); });
+        it('not equal(+1) for different date values', function() { assert.strictEqual(true, Date.compareByDate(dt1, new Date(new Date(dt1).setFullYear(1997))) === 1); });
+        it('not equal(-1) for different date values', function() { assert.strictEqual(true, Date.compareByDate(new Date(new Date(dt1).setFullYear(1997)), dt1) === -1); });
     });
 
     describe('#equal', function() {
