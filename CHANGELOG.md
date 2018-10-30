@@ -1,6 +1,6 @@
 # Changelog
 
-### 1.0.0 (Oct 30, 2018)
+## 1.0.0 (Oct 30, 2018)
 
 - Release
 - Splitting functions and prototype extensions
