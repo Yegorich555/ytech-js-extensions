@@ -1,6 +1,6 @@
 {
     "name": "ytech-js-extensions",
-    "version": "0.0.2",
+    "version": "1.0.0",
     "description": "Simple prototype extensions which can improve your working with js",
     "main": "index.js",
     "scripts": {
@@ -14,7 +14,10 @@
     "keywords": [
         "js",
         "extensions",
-        "js-extensions"
+        "js-extensions",
+        "compare objects",
+        "distance between coordinates",
+        "ytech"
     ],
     "author": "Yegorich555",
     "license": "MIT",
