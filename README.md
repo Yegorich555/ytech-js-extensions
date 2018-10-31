@@ -54,7 +54,7 @@ Using with partial import
 import arrayRemove from 'ytech-js-extensions/lib/array/remove';
 
 // Remove item from array
-var arr = new MyArray({ id: 11 }, { id: 12 }, { id: 13 });
+var arr = [{ id: 11 }, { id: 12 }, { id: 13 }]
 var removedItem = arrayRemove.call(arr, function(item) {
     return item.id == 12
 })
