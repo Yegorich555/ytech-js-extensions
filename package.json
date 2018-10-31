@@ -1,6 +1,6 @@
 {
     "name": "ytech-js-extensions",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Simple prototype extensions which can improve your working with js",
     "main": "index.js",
     "scripts": {

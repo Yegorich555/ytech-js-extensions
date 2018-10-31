@@ -54,13 +54,11 @@ Using with partial import
 import arrayRemove from 'ytech-js-extensions/lib/array/remove';
 
 // Remove item from array
-class MyArray extends Array {} //ES6 way for inherit
-MyArray.prototype.remove = arrayRemove;
+var arr = new MyArray({ id: 11 }, { id: 12 }, { id: 13 });
+var removedItem = arrayRemove.call(arr, function(item) {
+    return item.id == 12
+})
 
-var arr = new MyArray({id: 11}, {id: 12}, {id: 13});
-var removedItem = arr.remove(function (item) {
-   return item.id == 12
-  })
 console.log(arr, removedItem);
 
 ```
@@ -120,23 +118,27 @@ console.log(arr, removedItem);
 
 ### Object
 
-- [Object **.equal**(v1: any, v2: any, options?: [EqualOptions](equaloptions))](#objectequal) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
+- [Object **.equal**(v1: any, v2: any, options?:](#objectequal) [EqualOptions](#equaloptions)) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
+- [Object **.tryParseJSONDate**(obj: any)](#object) ⇒ `the same object: any - recursively find string values and trying parse to Date by Date.tryParseJSON(str)`
+- [Object **.removeNulls**(obj: String|Array|Object, options?:](#objectremovenulls) [RemoveOptions](#removeoptions)) ⇒ `the same object: any - remove null, undefined, ''(empty-string) properties by setted options`
 
 ### Object.equal
+
+Compare 2 objects by properties (with using [EqualOptions](#equaloptions))
 
 ```js
 import 'ytech-js-extensions'; //ES6 way for import
 import EqualOptions from 'ytech-js-extensions/object/equal/equalOptions.js';
 
 // Compare equals
-v1 = { nested: { id: 1 } }
-v2 = { nested: { id: 1 }, fnc: function() {} }
+var v1 = { nested: { id: 1 }, arr: ['s', 'd'], dt: new Date() }
+var v2 = { nested: { id: 1 }, arr: ['s', 'd'], dt: new Date(), fnc: function() {} }
 console.log(Object.equal(v1, v2)) //expected true
 
 //Compare with options
 var options = new EqualOptions();
 options.ignoreEmptyArrays = true;
-options.ignoreFunctions = false; //we setted ignoreFunction to false
+options.ignoreFunctions = false; //here we setted ignoreFunctions to false
 options.checkKeysLength = false;
 options.showFalseReason = true; //or function(message, v1, v2, key) { bla-bla; return message}
 console.log(Object.equal(v1, v2, options), options.falseReason) //expected false and falseReason as string message
@@ -152,3 +154,35 @@ console.log(Object.equal(v1, v2, options), options.falseReason) //expected false
 | ignoreFunctions   | Boolean                            | true    | true => equal({fnc:function(){return 's'} }, {fnc:function(){return 'b'} }) === true                                                                                                            |
 | showFalseReason   | Boolean or Function(msg,v1,v2,key) | false   | true if we need to add to options.falseReason message if equal is false </br>                                                                       function if we need to use own report-logic |
 | falseReason       | String - output                    |         | will be added message if showFalseReason != true and equal is false                                                                                                                             |
+
+### Object.removeNulls
+
+Remove null properties (values) from String, Array or Object (with using [RemoveOptions](#removeoptions))
+
+```js
+import 'ytech-js-extensions'; //ES6 way for import
+import RemoveOptions from 'ytech-js-extensions/object/remove/removeOptions.js';
+
+// Remove without default options
+var v = { id: 1, arr: [1, null, 2], arr2: [null, ' ', undefined], arr3: [], s: ' ', s2: ' str ' }
+console.log(Object.removeNulls(v)) //expected { id: 1, arr: [1, 2], s2: 'str' }
+
+//Remove with options
+var options = new RemoveOptions();
+options.removeEmptyArrays = true;
+options.removeNullsFromArrays = false;
+options.trimStrings = false; //use 's'.trim()
+options.removeEmptyStrings = true;
+var v = { id: 1, arr: [1, null, 2], arr2: [null, ' ', undefined], arr3: [], s: ' ', s2: ' str ' }
+console.log(Object.removeNulls(v, options)) //expected { id: 1, arr: [1, 2], s2: 'str' }
+
+```
+
+#### RemoveOptions
+
+| Param                 | Type    | Default | Description                                                                                                                           |
+| --------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| removeEmptyArrays     | Boolean | true    | true => remove arrays with length === 0                                                                                               |
+| removeNullsFromArrays | Boolean | true    | true => [1, null, 2] filter to [1, 2]                                                                                                 |
+| trimStrings           | Boolean | true    | true => use the default string.[trim()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) |
+| removeEmptyStrings    | Boolean | true    | true => remove properties, values which has string value == ''                                                                        |
