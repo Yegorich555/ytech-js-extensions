@@ -120,9 +120,11 @@ console.log(arr, removedItem);
 
 - [Object **.equal**(v1: any, v2: any, options?:](#objectequal) [EqualOptions](#equaloptions)) ⇒ `Boolean - recursively compare 2 values with ignoring null and by setted EqaulOptions`
 - [Object **.tryParseJSONDate**(obj: any)](#object) ⇒ `the same object: any - recursively find string values and trying parse to Date by Date.tryParseJSON(str)`
-- [Object **.removeNulls**(obj: String|Array|Object, options?:](#objectremovenulls) [EqualOptions](#removeoptions)) ⇒ `the same object: any - remove null, undefined, ''(empty-string) properties by setted options`
+- [Object **.removeNulls**(obj: String|Array|Object, options?:](#objectremovenulls) [RemoveOptions](#removeoptions)) ⇒ `the same object: any - remove null, undefined, ''(empty-string) properties by setted options`
 
 ### Object.equal
+
+Compare 2 objects by properties (with using [EqualOptions](#equaloptions))
 
 ```js
 import 'ytech-js-extensions'; //ES6 way for import
@@ -154,6 +156,8 @@ console.log(Object.equal(v1, v2, options), options.falseReason) //expected false
 | falseReason       | String - output                    |         | will be added message if showFalseReason != true and equal is false                                                                                                                             |
 
 ### Object.removeNulls
+
+Remove null properties (values) from String, Array or Object (with using [RemoveOptions](#removeoptions))
 
 ```js
 import 'ytech-js-extensions'; //ES6 way for import
