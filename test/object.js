@@ -144,4 +144,40 @@ describe('Object', function() {
             assert.strictEqual(true, equal);
         })
     })
+
+    describe('#removeNulls', function() {
+        if (!defined(Object.removeNulls))
+            return;
+        it('options.trimStrings = true', function() { assert.strictEqual('str', Object.removeNulls(' str  ', { trimStrings: true })) })
+        it('options.trimStrings = false', function() { assert.strictEqual(' str ', Object.removeNulls(' str ', { trimStrings: false })) })
+        it('options.removeEmptyStrings = false', function() { assert.strictEqual('', Object.removeNulls('', { removeEmptyStrings: false })) })
+        it('options.removeEmptyStrings = true', function() { assert.strictEqual(undefined, Object.removeNulls('', { removeEmptyStrings: true })) })
+        it('options.disable array props', function() {
+            var r = Object.removeNulls([1, null, 's'], { removeEmptyArrays: false, removeNullsFromArrays: false })
+            assert.strictEqual(true, r[0] === 1 && r[1] === null && r[2] === 's')
+        })
+        it('options.removeEmptyArrays=true', function() {
+            var r = Object.removeNulls([], { removeEmptyArrays: true, removeNullsFromArrays: false })
+            assert.strictEqual(undefined, r);
+        })
+        it('options.removeNullsFromArrays=true', function() {
+            var r = Object.removeNulls([1, null, 's'], { removeEmptyArrays: false, removeNullsFromArrays: true })
+            assert.strictEqual(true, r.length === 2 && r[0] === 1 && r[1] === 's')
+        })
+        it('array with ES5 filter pollyfill', function() {
+            var f = Array.prototype.filter; //fix for mocha during test
+            Array.prototype.filter = null;
+            var r = Object.removeNulls([null], { removeNullsFromArrays: true, removeEmptyArrays: false })
+            assert.strictEqual(true, r.length === 0)
+            Array.prototype.filter = f; //fix for mocha during test
+        })
+        it('full test for object with default options', function() {
+            var r = Object.removeNulls({ id: 1, arr: [1, null, 2], arr2: [null, undefined], arr3: [], s: ' ', s2: ' str ' })
+            assert.strictEqual(true,
+                r.id === 1 && r.arr && r.arr.length === 2 && r.arr[0] === 1 && r.arr[1] === 2 &&
+                !r.hasOwnProperty('arr2') && !r.hasOwnProperty('arr3') && !r.hasOwnProperty('s') &&
+                r.s2 === 'str'
+            )
+        })
+    });
 });
