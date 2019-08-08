@@ -1,10 +1,14 @@
 # Changelog
 
+## 1.0.2 (Aug 8, 2019)
+
+- Fix bug 'Exception with null-properties' in Object.tryParseJSONDate
+
 ## 1.0.1 (Oct 31, 2018)
 
 - Add [Object.tryParseJSONDate](https://github.com/Yegorich555/ytech-js-extensions#object)
 - Add [Object.removeNulls](https://github.com/Yegorich555/ytech-js-extensions#objectremovenulls)
-  
+
 ### 1.0.0 (Oct 30, 2018)
 
 - Release

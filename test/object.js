@@ -143,6 +143,17 @@ describe('Object', function() {
             var equal = v.id === 1 && v.dt === dt && v.dt2.valueOf() === dtv && v.str === 'ds' && v.arr[0].id === 11 && v.arr[1] == 2;
             assert.strictEqual(true, equal);
         })
+        it('nested nulls', function(){
+            var v = {id: 1, nullValue: null, nullValueNested: {idn: 2, nullNested: null}};
+            Object.tryParseJSONDate(v);
+            var equal =
+              v.id === 1 &&
+              v.nullValue === null &&
+              v.nullValueNested &&
+              v.nullValueNested.idn === 2
+              v.nullValueNested.nullNested === null;
+              assert.strictEqual(true, equal);
+        })
     })
 
     describe('#removeNulls', function() {
