@@ -1,6 +1,6 @@
 {
     "name": "ytech-js-extensions",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Simple prototype extensions which can improve your working with js",
     "main": "index.js",
     "scripts": {
@@ -29,6 +29,9 @@
         "index.js",
         "lib/*"
     ],
-    "devDependencies": {},
+    "devDependencies": {
+        "mocha": "^6.2.0",
+        "nyc": "^14.1.1"
+    },
     "dependencies": {}
 }
