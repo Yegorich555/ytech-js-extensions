@@ -198,3 +198,26 @@ console.log(Object.removeNulls(v, options)); //expected { id: 1, arr: [1, 2], s2
 | removeNullsFromArrays | Boolean | true    | true => [1, null, 2] filter to [1, 2]                                                                                                 |
 | trimStrings           | Boolean | true    | true => use the default string.[trim()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) |
 | removeEmptyStrings    | Boolean | true    | true => remove properties, values which has string value == ''                                                                        |
+
+## Troubleshooting
+
+- Some packages (like html2canvas, pdfjs) can stop working if you have prototype extensions of default types (Array, String, Object etc.). In this case we can
+
+  - include in project only specific functions instead of prototype-assign - see [Example](#Example) **OR**
+  - temporarily remove extensions and assign again later
+
+    ```js
+    // removing prototype extensions otherwise it doesn't work with pdfjs
+    const arrProto = {};
+    for (const i in Array.prototype) {
+      arrProto[i] = Array.prototype[i];
+      delete Array.prototype[i];
+    }
+
+    // ... do something here
+
+    // rollback prototype extensions
+    for (const i in arrProto) {
+      Array.prototype[i] = arrProto[i];
+    }
+    ```

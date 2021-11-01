@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 (Nov 1, 2021)
+
+- Added TS-support
+- Removed ES6 Array pollyfills
+
 ## 1.0.2 (Aug 8, 2019)
 
 - Fix bug 'Exception with null-properties' in Object.tryParseJSONDate
