@@ -4,11 +4,11 @@
   https://github.com/Yegorich555/ytech-js-extensions
 */
 /* global define */
-'use strict'
+"use strict";
 
-require('./lib/array/index.js');
-require('./lib/date/index.js');
-require('./lib/math/index.js');
-require('./lib/string/index.js');
+import "./lib/array/index";
+import "./lib/date/index";
+import "./lib/math/index";
+import "./lib/string/index";
 
-module.exports = require('./lib/object/index.js');
+export * from "./lib/object/index";

@@ -27,49 +27,44 @@ npm install ytech-js-extensions
 Using with default import
 
 ```js
-import 'ytech-js-extensions'; //ES6 way for import
+import "ytech-js-extensions"; //ES6 way for import
 
 // Remove item from array
-var arr = [{id: 1}, {id: 2}, {id: 3}];
+var arr = [{ id: 1 }, { id: 2 }, { id: 3 }];
 var removedItem = arr.remove(function (item) {
-   return item.id == 2
-  })
+  return item.id == 2;
+});
 console.log(arr, removedItem);
 
 // Compare dates without time
-var date1 = new Date(2018,1,1, 12,23,16)
-var date2 = new Date(2018,1,1, 12,24,19)
-console.log(Date.compareByDate(date1, date2))
+var date1 = new Date(2018, 1, 1, 12, 23, 16);
+var date2 = new Date(2018, 1, 1, 12, 24, 19);
+console.log(Date.compareByDate(date1, date2));
 
 // Compare strings with ignoring case
-var str1 = 'test'
-var str2 = 'tEsT'
-console.log(str1.equal(str2))
-
+var str1 = "test";
+var str2 = "tEsT";
+console.log(str1.equal(str2));
 ```
 
 Using with partial import
 
 ```js
-import arrayRemove from 'ytech-js-extensions/lib/array/remove';
+import arrayRemove from "ytech-js-extensions/lib/array/remove";
 
 // Remove item from array
-var arr = [{ id: 11 }, { id: 12 }, { id: 13 }]
-var removedItem = arrayRemove.call(arr, function(item) {
-    return item.id == 12
-})
+var arr = [{ id: 11 }, { id: 12 }, { id: 13 }];
+var removedItem = arrayRemove.call(arr, function (item) {
+  return item.id == 12;
+});
 
 console.log(arr, removedItem);
-
 ```
 
 ### Array
 
 - _instance_
   - [**.last**()](#array) ⇒ `any - last item from array (undefined if array is empty)`
-  - [**.includes**(item: any)](#array) ⇒ `Boolean - polyfill if ES6 .includes() is undefined`
-  - [**.find**(item: any, predicate: function)](#array) ⇒ `any - polyfill if ES6 .find() is undefined`
-  - [**.filter**(callbackfn: function)](#array) ⇒ `new Array - polyfill if ES6 .filter() is undefined`
   - [**.addIfNotExists**(item: any, null | String | predicate)](#array) ⇒ `executed item: any - add item if it doesn't exist. The second argument => Null - for primitives, string - search by name, function - predicate like in a .filter()`
   - [**.remove**(item: any | predicate: function)](#array) ⇒ `executed item: any - remove item by predicate for searching or by item (for direct comparing)`
 - _static_
@@ -127,13 +122,18 @@ console.log(arr, removedItem);
 Compare 2 objects by properties (with using [EqualOptions](#equaloptions))
 
 ```js
-import 'ytech-js-extensions'; //ES6 way for import
-import EqualOptions from 'ytech-js-extensions/object/equal/equalOptions.js';
+import "ytech-js-extensions"; //ES6 way for import
+import EqualOptions from "ytech-js-extensions/object/equal/equalOptions.js";
 
 // Compare equals
-var v1 = { nested: { id: 1 }, arr: ['s', 'd'], dt: new Date() }
-var v2 = { nested: { id: 1 }, arr: ['s', 'd'], dt: new Date(), fnc: function() {} }
-console.log(Object.equal(v1, v2)) //expected true
+var v1 = { nested: { id: 1 }, arr: ["s", "d"], dt: new Date() };
+var v2 = {
+  nested: { id: 1 },
+  arr: ["s", "d"],
+  dt: new Date(),
+  fnc: function () {},
+};
+console.log(Object.equal(v1, v2)); //expected true
 
 //Compare with options
 var options = new EqualOptions();
@@ -141,31 +141,37 @@ options.ignoreEmptyArrays = true;
 options.ignoreFunctions = false; //here we setted ignoreFunctions to false
 options.checkKeysLength = false;
 options.showFalseReason = true; //or function(message, v1, v2, key) { bla-bla; return message}
-console.log(Object.equal(v1, v2, options), options.falseReason) //expected false and falseReason as string message
-
+console.log(Object.equal(v1, v2, options), options.falseReason); //expected false and falseReason as string message
 ```
 
 #### EqualOptions
 
-| Param             | Type                               | Default | Description                                                                                                                                                                                     |
-| ----------------- | ---------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| checkKeysLength   | Boolean                            | false   | true => restrict comparing by properties: equal({}, {v:null}) === false. </br> True will ignore ignoreFunctions and ignoreEmptyArrays if Object.keys.length are different                       |
-| ignoreEmptyArrays | Boolean                            | true    | true => equal({}, {arr:[]}) === true                                                                                                                                                            |
-| ignoreFunctions   | Boolean                            | true    | true => equal({fnc:function(){return 's'} }, {fnc:function(){return 'b'} }) === true                                                                                                            |
-| showFalseReason   | Boolean or Function(msg,v1,v2,key) | false   | true if we need to add to options.falseReason message if equal is false </br>                                                                       function if we need to use own report-logic |
-| falseReason       | String - output                    |         | will be added message if showFalseReason != true and equal is false                                                                                                                             |
+| Param             | Type                               | Default | Description                                                                                                                                                               |
+| ----------------- | ---------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| checkKeysLength   | Boolean                            | false   | true => restrict comparing by properties: equal({}, {v:null}) === false. </br> True will ignore ignoreFunctions and ignoreEmptyArrays if Object.keys.length are different |
+| ignoreEmptyArrays | Boolean                            | true    | true => equal({}, {arr:[]}) === true                                                                                                                                      |
+| ignoreFunctions   | Boolean                            | true    | true => equal({fnc:function(){return 's'} }, {fnc:function(){return 'b'} }) === true                                                                                      |
+| showFalseReason   | Boolean or Function(msg,v1,v2,key) | false   | true if we need to add to options.falseReason message if equal is false </br> function if we need to use own report-logic                                                 |
+| falseReason       | String - output                    |         | will be added message if showFalseReason != true and equal is false                                                                                                       |
 
 ### Object.removeNulls
 
 Remove null properties (values) from String, Array or Object (with using [RemoveOptions](#removeoptions))
 
 ```js
-import 'ytech-js-extensions'; //ES6 way for import
-import RemoveOptions from 'ytech-js-extensions/object/remove/removeOptions.js';
+import "ytech-js-extensions"; //ES6 way for import
+import RemoveOptions from "ytech-js-extensions/object/remove/removeOptions.js";
 
 // Remove without default options
-var v = { id: 1, arr: [1, null, 2], arr2: [null, ' ', undefined], arr3: [], s: ' ', s2: ' str ' }
-console.log(Object.removeNulls(v)) //expected { id: 1, arr: [1, 2], s2: 'str' }
+var v = {
+  id: 1,
+  arr: [1, null, 2],
+  arr2: [null, " ", undefined],
+  arr3: [],
+  s: " ",
+  s2: " str ",
+};
+console.log(Object.removeNulls(v)); //expected { id: 1, arr: [1, 2], s2: 'str' }
 
 //Remove with options
 var options = new RemoveOptions();
@@ -173,9 +179,15 @@ options.removeEmptyArrays = true;
 options.removeNullsFromArrays = false;
 options.trimStrings = false; //use 's'.trim()
 options.removeEmptyStrings = true;
-var v = { id: 1, arr: [1, null, 2], arr2: [null, ' ', undefined], arr3: [], s: ' ', s2: ' str ' }
-console.log(Object.removeNulls(v, options)) //expected { id: 1, arr: [1, 2], s2: 'str' }
-
+var v = {
+  id: 1,
+  arr: [1, null, 2],
+  arr2: [null, " ", undefined],
+  arr3: [],
+  s: " ",
+  s2: " str ",
+};
+console.log(Object.removeNulls(v, options)); //expected { id: 1, arr: [1, 2], s2: 'str' }
 ```
 
 #### RemoveOptions
@@ -186,3 +198,26 @@ console.log(Object.removeNulls(v, options)) //expected { id: 1, arr: [1, 2], s2:
 | removeNullsFromArrays | Boolean | true    | true => [1, null, 2] filter to [1, 2]                                                                                                 |
 | trimStrings           | Boolean | true    | true => use the default string.[trim()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) |
 | removeEmptyStrings    | Boolean | true    | true => remove properties, values which has string value == ''                                                                        |
+
+## Troubleshooting
+
+- Some packages (like html2canvas, pdfjs) can stop working if you have prototype extensions of default types (Array, String, Object etc.). In this case we can
+
+  - include in project only specific functions instead of prototype-assign - see [Example](#Example) **OR**
+  - temporarily remove extensions and assign again later
+
+    ```js
+    // removing prototype extensions otherwise it doesn't work with pdfjs
+    const arrProto = {};
+    for (const i in Array.prototype) {
+      arrProto[i] = Array.prototype[i];
+      delete Array.prototype[i];
+    }
+
+    // ... do something here
+
+    // rollback prototype extensions
+    for (const i in arrProto) {
+      Array.prototype[i] = arrProto[i];
+    }
+    ```
