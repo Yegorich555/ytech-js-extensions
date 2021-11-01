@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "es6",
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "commonJs",
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "dist"
+  },
+  "files": ["index.js"],
+  "include": ["lib/*"],
+  "exclude": ["node_modules", "test", "coverage"]
+}
