@@ -6,10 +6,10 @@
 /* global define */
 "use strict";
 
-import "./lib/array/index.js";
-import "./lib/date/index.js";
+import "./lib/array/index";
+import "./lib/date/index";
+import "./lib/math/index";
 
-require("./lib/math/index.js");
 require("./lib/string/index.js");
 
 module.exports = require("./lib/object/index.js");
