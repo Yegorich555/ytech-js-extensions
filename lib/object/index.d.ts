@@ -24,3 +24,6 @@ interface ObjectConstructor {
    */
   removeNulls: typeof import("./removeNulls/index").default;
 }
+
+export * from "./equal/equalOptions.js";
+export * from "./removeNulls/removeOptions.js";

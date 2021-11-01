@@ -9,7 +9,6 @@
 import "./lib/array/index";
 import "./lib/date/index";
 import "./lib/math/index";
+import "./lib/string/index";
 
-require("./lib/string/index.js");
-
-module.exports = require("./lib/object/index.js");
+export * from "./lib/object/index";

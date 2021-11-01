@@ -4,4 +4,4 @@
  * @param {*} obj
  * @return {*} the same object
  */
-export default function tryParseJSON<T>(obj: T): T;
+export default function tryParseJSONDate<T>(obj: T): T;
