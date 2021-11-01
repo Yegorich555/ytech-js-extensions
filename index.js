@@ -7,8 +7,8 @@
 "use strict";
 
 import "./lib/array/index.js";
+import "./lib/date/index.js";
 
-require("./lib/date/index.js");
 require("./lib/math/index.js");
 require("./lib/string/index.js");
 
