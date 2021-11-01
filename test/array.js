@@ -12,25 +12,6 @@ describe('Array', function() {
         it('return undefined if empty', function() { assert.strictEqual(undefined, [].last()); });
 
     });
-    describe('#includes', function() {
-        it('defined', function() { assert.notStrictEqual(undefined, [].includes); });
-        if (![].includes) return;
-        it('return true', function() { assert.strictEqual(true, [1, 2, 3].includes(1)); });
-        it('return false', function() { assert.strictEqual(false, [1, 2, 3].includes(12)); });
-        it('return false if empty', function() { assert.strictEqual(false, [].includes(1)); });
-    });
-    describe('#find', function() {
-        it('defined', function() { assert.notStrictEqual(undefined, [].find); });
-        if (![].find) return;
-        it('return found', function() { assert.strictEqual(2, [1, 2, 3].find(v => v === 2)); });
-        it('return undefined', function() { assert.strictEqual(undefined, [1, 2, 3].find(v => v === 4)); });
-    });
-    describe('#filter', function() {
-        it('defined', function() { assert.notStrictEqual(undefined, [].filter); });
-        if (![].filter) return;
-        var arr = [1, 2, 3].filter(v => v === 2);
-        it('return filtered array', function() { assert.strictEqual(2, Array.isArray(arr) && arr[0]); });
-    });
     describe('#addIfNotExists', function() {
         it('defined', function() { assert.notStrictEqual(undefined, [].addIfNotExists); });
         if (![].addIfNotExists) return;

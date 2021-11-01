@@ -67,9 +67,6 @@ console.log(arr, removedItem);
 
 - _instance_
   - [**.last**()](#array) ⇒ `any - last item from array (undefined if array is empty)`
-  - [**.includes**(item: any)](#array) ⇒ `Boolean - polyfill if ES6 .includes() is undefined`
-  - [**.find**(item: any, predicate: function)](#array) ⇒ `any - polyfill if ES6 .find() is undefined`
-  - [**.filter**(callbackfn: function)](#array) ⇒ `new Array - polyfill if ES6 .filter() is undefined`
   - [**.addIfNotExists**(item: any, null | String | predicate)](#array) ⇒ `executed item: any - add item if it doesn't exist. The second argument => Null - for primitives, string - search by name, function - predicate like in a .filter()`
   - [**.remove**(item: any | predicate: function)](#array) ⇒ `executed item: any - remove item by predicate for searching or by item (for direct comparing)`
 - _static_
