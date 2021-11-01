@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1 (Nov 1, 2021)
+
+- Fixed missed index.d.ts
+
 ## 2.0.0 (Nov 1, 2021)
 
 - Added TS-support
