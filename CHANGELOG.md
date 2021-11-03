@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3 (Nov 3, 2021)
+
+- Fix to `require()` (instead of `require(...).default`)
+
 ## 2.0.2 (Nov 3, 2021)
 
 - Rollback imports/exports to require() (ES5 module)
