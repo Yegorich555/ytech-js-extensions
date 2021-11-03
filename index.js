@@ -6,9 +6,11 @@
 /* global define */
 "use strict";
 
-import "./lib/array/index";
-import "./lib/date/index";
-import "./lib/math/index";
-import "./lib/string/index";
+require("./lib/array/index");
+require("./lib/date/index");
+require("./lib/math/index");
+require("./lib/string/index");
 
-export * from "./lib/object/index";
+module.exports = {
+  ...require("./lib/object/index"),
+};
