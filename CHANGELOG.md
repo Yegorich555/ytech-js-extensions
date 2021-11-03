@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2 (Nov 3, 2021)
+
+- Rollback imports/exports to require() (ES5 module)
+- Change `var` to `let` & `const`
+
 ## 2.0.1 (Nov 1, 2021)
 
 - Fixed missed index.d.ts
@@ -8,6 +13,7 @@
 
 - Added TS-support
 - Removed ES6 Array pollyfills
+- Changed imports/exports to ES6-module
 
 ## 1.0.2 (Aug 8, 2019)
 
