@@ -1,4 +1,4 @@
-var assert = require("assert");
+let assert = require("assert");
 require("../index");
 
 describe("Array", function () {
@@ -26,51 +26,51 @@ describe("Array", function () {
       assert.throws((_) => [].addIfNotExists(null, 1), TypeError);
     });
     it("add for int-type", function () {
-      var arr = [1, 2];
-      var v = arr.addIfNotExists(3);
+      let arr = [1, 2];
+      let v = arr.addIfNotExists(3);
       assert.strictEqual(2, v === 3 && arr.length === 3 && arr.indexOf(3));
     });
     it("exists for int-type", function () {
-      var arr = [1, 2, 3];
-      var v = arr.addIfNotExists(2);
+      let arr = [1, 2, 3];
+      let v = arr.addIfNotExists(2);
       assert.strictEqual(1, v === 2 && arr.length === 3 && arr.indexOf(2));
     });
     it("add for empty-array", function () {
-      var arr = [];
-      var v = arr.addIfNotExists(2);
+      let arr = [];
+      let v = arr.addIfNotExists(2);
       assert.strictEqual(0, v === 2 && arr.length === 1 && arr.indexOf(2));
     });
     it("add for object by stringProp", function () {
-      var arr = [{ id: 1 }, { id: 2 }];
-      var newItem = { id: 3 };
-      var v = arr.addIfNotExists(newItem, "id");
+      let arr = [{ id: 1 }, { id: 2 }];
+      let newItem = { id: 3 };
+      let v = arr.addIfNotExists(newItem, "id");
       assert.strictEqual(
         2,
         v === newItem && arr.length === 3 && arr.indexOf(newItem)
       );
     });
     it("exists for object by stringProp", function () {
-      var arr = [{ id: 1 }, { id: 2 }];
-      var existsItem = arr[1];
-      var v = arr.addIfNotExists(Object.assign({}, existsItem), "id");
+      let arr = [{ id: 1 }, { id: 2 }];
+      let existsItem = arr[1];
+      let v = arr.addIfNotExists(Object.assign({}, existsItem), "id");
       assert.strictEqual(
         1,
         v === existsItem && arr.length === 2 && arr.indexOf(existsItem)
       );
     });
     it("add for object by callBackToPropFunc", function () {
-      var arr = [{ id: 1 }, { id: 2 }];
-      var newItem = { id: 3 };
-      var v = arr.addIfNotExists(newItem, (v) => v.id);
+      let arr = [{ id: 1 }, { id: 2 }];
+      let newItem = { id: 3 };
+      let v = arr.addIfNotExists(newItem, (v) => v.id);
       assert.strictEqual(
         2,
         v === newItem && arr.length === 3 && arr.indexOf(newItem)
       );
     });
     it("exists for object by callBackToPropFunc", function () {
-      var arr = [{ id: 1 }, { id: 2 }];
-      var existsItem = arr[1];
-      var v = arr.addIfNotExists(Object.assign({}, existsItem), (v) => v.id);
+      let arr = [{ id: 1 }, { id: 2 }];
+      let existsItem = arr[1];
+      let v = arr.addIfNotExists(Object.assign({}, existsItem), (v) => v.id);
       assert.strictEqual(
         1,
         v === existsItem && arr.length === 2 && arr.indexOf(existsItem)
@@ -86,35 +86,35 @@ describe("Array", function () {
       assert.strictEqual(undefined, Array.prototype.remove.call());
     });
     it("remove for int-type", function () {
-      var arr = [1, 2, 3];
-      var v = arr.remove(2);
+      let arr = [1, 2, 3];
+      let v = arr.remove(2);
       assert.strictEqual(
         true,
         v === 2 && arr.length === 2 && arr.indexOf(2) === -1
       );
     });
     it("not remove if was not found", function () {
-      var arr = [1, 2, 3];
-      var v = arr.remove(4);
+      let arr = [1, 2, 3];
+      let v = arr.remove(4);
       assert.strictEqual(true, v === undefined && arr.length === 3);
     });
     it("remove for object-type by callback", function () {
-      var arr = [{ id: 1 }, { id: 2 }, { id: 3 }];
-      var v = arr.remove((v1) => v1.id === 2);
+      let arr = [{ id: 1 }, { id: 2 }, { id: 3 }];
+      let v = arr.remove((v1) => v1.id === 2);
       assert.strictEqual(true, v && v.id === 2 && arr.length === 2);
     });
     it("remove for object-type by equal directly", function () {
-      var obj = { id: 2 };
-      var arr = [{ id: 1 }, obj, { id: 3 }];
-      var v = arr.remove(obj);
+      let obj = { id: 2 };
+      let arr = [{ id: 1 }, obj, { id: 3 }];
+      let v = arr.remove(obj);
       assert.strictEqual(
         true,
         v && v.id === 2 && arr.length === 2 && arr[1].id !== 2
       );
     });
     it("not remove for object-type if was not found", function () {
-      var arr = [{ id: 1 }, { id: 2 }, { id: 3 }];
-      var v = arr.remove((v1) => v1.id === 4);
+      let arr = [{ id: 1 }, { id: 2 }, { id: 3 }];
+      let v = arr.remove((v1) => v1.id === 4);
       assert.strictEqual(undefined, v);
     });
   });
@@ -124,11 +124,11 @@ describe("Array", function () {
     });
     if (!Array.concatNotNull) return;
     it("full-test", function () {
-      var arr1 = [1, 2];
-      var arr2 = null;
-      var arr3 = [3, 4];
-      var arr4 = [];
-      var arr = Array.concatNotNull(arr1, arr2, arr3, arr4);
+      let arr1 = [1, 2];
+      let arr2 = null;
+      let arr3 = [3, 4];
+      let arr4 = [];
+      let arr = Array.concatNotNull(arr1, arr2, arr3, arr4);
       assert.strictEqual(
         true,
         arr &&

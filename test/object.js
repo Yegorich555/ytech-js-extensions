@@ -1,8 +1,8 @@
-var assert = require("assert");
+let assert = require("assert");
 require("../index");
 
 describe("Object", function () {
-  var defined = (fn) => {
+  let defined = (fn) => {
     it("defined", function () {
       assert.notEqual(undefined, fn);
     });
@@ -11,9 +11,9 @@ describe("Object", function () {
 
   describe("#equal", function () {
     if (!defined(Object.equal)) return;
-    var dt = new Date();
-    var objs = Array(2);
-    for (var i = 0; i < 3; ++i)
+    let dt = new Date();
+    let objs = Array(2);
+    for (let i = 0; i < 3; ++i)
       objs[i] = {
         id: 1,
         lst: [
@@ -34,8 +34,8 @@ describe("Object", function () {
         },
       };
 
-    var options = { showFalseReason: true };
-    var result = Object.equal(objs[0], objs[1], options);
+    let options = { showFalseReason: true };
+    let result = Object.equal(objs[0], objs[1], options);
 
     function strictEqual(expected, v1, v2) {
       if (v1 === undefined) {
@@ -130,7 +130,7 @@ describe("Object", function () {
     });
 
     it("options.showFalseReason is function", function () {
-      var opt = {
+      let opt = {
         showFalseReason: function (msg, v1, v2, key) {
           console.log("checking function:" + msg, v1, v2, key);
           return msg;
@@ -146,24 +146,24 @@ describe("Object", function () {
 
   describe("#tryParseJSONDate", function () {
     if (!defined(Object.tryParseJSONDate)) return;
-    var dt = new Date();
-    var dtv = dt.valueOf();
-    var dtStr = dt.toJSON();
+    let dt = new Date();
+    let dtv = dt.valueOf();
+    let dtStr = dt.toJSON();
 
     it("primitive string", function () {
       assert.strictEqual(dtv, Object.tryParseJSONDate(dtStr).valueOf());
     });
     it("array", function () {
-      var r = Object.tryParseJSONDate([dt, dtStr, 1]);
+      let r = Object.tryParseJSONDate([dt, dtStr, 1]);
       assert.strictEqual(
         true,
         r[0].valueOf() == dtv && r[1].valueOf() == dtv && r[2] == 1
       );
     });
     it("properties", function () {
-      var v = { id: 1, dt, dt2: dtStr, str: "ds", arr: [{ id: 11 }, 2] };
+      let v = { id: 1, dt, dt2: dtStr, str: "ds", arr: [{ id: 11 }, 2] };
       Object.tryParseJSONDate(v);
-      var equal =
+      let equal =
         v.id === 1 &&
         v.dt === dt &&
         v.dt2.valueOf() === dtv &&
@@ -173,13 +173,13 @@ describe("Object", function () {
       assert.strictEqual(true, equal);
     });
     it("nested nulls", function () {
-      var v = {
+      let v = {
         id: 1,
         nullValue: null,
         nullValueNested: { idn: 2, nullNested: null },
       };
       Object.tryParseJSONDate(v);
-      var equal =
+      let equal =
         v.id === 1 &&
         v.nullValue === null &&
         v.nullValueNested &&
@@ -216,28 +216,28 @@ describe("Object", function () {
       );
     });
     it("options.disable array props", function () {
-      var r = Object.removeNulls([1, null, "s"], {
+      let r = Object.removeNulls([1, null, "s"], {
         removeEmptyArrays: false,
         removeNullsFromArrays: false,
       });
       assert.strictEqual(true, r[0] === 1 && r[1] === null && r[2] === "s");
     });
     it("options.removeEmptyArrays=true", function () {
-      var r = Object.removeNulls([], {
+      let r = Object.removeNulls([], {
         removeEmptyArrays: true,
         removeNullsFromArrays: false,
       });
       assert.strictEqual(undefined, r);
     });
     it("options.removeNullsFromArrays=true", function () {
-      var r = Object.removeNulls([1, null, "s"], {
+      let r = Object.removeNulls([1, null, "s"], {
         removeEmptyArrays: false,
         removeNullsFromArrays: true,
       });
       assert.strictEqual(true, r.length === 2 && r[0] === 1 && r[1] === "s");
     });
     it("full test for object with default options", function () {
-      var r = Object.removeNulls({
+      let r = Object.removeNulls({
         id: 1,
         arr: [1, null, 2],
         arr2: [null, undefined],
